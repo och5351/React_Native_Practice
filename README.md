@@ -91,28 +91,148 @@ React Native App을 설치하고 실행하면 React Native의 Native module이 �
 1. 가상 DOM 객체 생성
 
 ```javascript
-const pElement = React.createElement("p", null, "Hello world!");
+const pElement = React.createElement('p', null, 'Hello world!')
 ```
 
 2. 물리 DOM 객체 생성
 
 ```javascript
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(pElement, document.body);
+ReactDOM.render(pElement, document.body)
 ```
 
 3. 가상 DOM 객체 생성
 
 ```javascript
-const textElement = React.createElement(Text, null, "Hello world!");
+const textElement = React.createElement(Text, null, 'Hello world!')
 ```
 
 4. DOM 객체를 네이티브로 넘김
 
 ```javascript
 export default function App() {
-  const testElement = React.createElement(Text, null, "Hello world!");
-  return testElement;
+  const testElement = React.createElement(Text, null, 'Hello world!')
+  return testElement
 }
+```
+
+### React Native 가 제공하는 두 가지 서비스
+
+<br>
+
+1. Core component: 어떤 내용을 Rendering 해야 할 때 사용
+   <br>
+
+2. API: 폰의 하드웨어나 운영체제가 제공하는 기능이 필요할 때 사용
+   <br>
+
+> React 와 같은 framework에서는 자신만의 Component를 만들 수 있다. 이렇게 직접 만드는 Component는 사용자 정의 컴포넌트 또는 사용자 컴포넌트라고 한다.
+> <br>
+
+사용자 컴포넌트 : 객체 지향 프로그래밍에서 컴포넌트 UI를 담당하는 클래스를 의미.
+
+- 클래스 컴포넌트 : 객체지향 방식
+- 함수 컴포넌트 : 리액트 훅 기능이 새로 도입되면서 나온 함수형 방식
+
+<br>
+
+클래스 컴포넌트
+
+```javascript
+import React, {component} from 'react'
+import {Text} from 'react-native'
+import * as D from '../data'
+
+const person = D.createRandomPerson()
+export default class ClassComponent extends Component {
+  render() {
+    return <Text>{JSON.stringify(person, null, 2)}</Text>
+  }
+}
+```
+
+<br>
+
+함수형 컴포넌트
+
+```javascript
+import React from 'react'
+import {Text} from 'react-native'
+import * as D from '../data'
+
+const person = D.createRandomPerson()
+const ArrowComponent = () => {
+  return <Text>{JSON.stringify(person, null, 2)}</Text>
+}
+export default ArrowComponent
+```
+
+<br><br>
+
+### 속성이란?
+
+<br>
+
+속성이란 클래스의 맴버 변수를 의미.
+또한 화면 UI를 담당하는 '클래스'이므로 속성을 가질 수 있다.
+<br>
+
+- 가변 : 수시로 값이 바뀌는 값
+- 불변 : 한번 설정되면 다시는 바뀌지 않는 값
+  <br>
+
+React Native는 component의 속성이 바뀌면 이를 즉각 화면에 반영해야 한다.
+React와 React Native에서 바뀐 속성값을 화면에 반영하는 것을 Re-rendering이라고 한다.
+React와 React Native에서 속성은 '클래스 속성 + 재렌더링'을 의미하는 용어.
+<br>
+
+string 타입 속성값 지정
+
+```javascript
+<Person name="Jack" />
+```
+
+<br>
+
+number 타입 속성값 지정
+
+```javascript
+<Person name="Jack" age={22} />
+```
+
+<br>
+
+속성값이 객체일 때
+
+```javascript
+<Person person={{name: 'Jack', age: 32}} />
+```
+
+<br>
+
+자식 컴포넌트로 데이터 전달
+
+```javascript
+const person = D.createRandomPerson()
+
+export default function App() {
+  return <ArrowComponent person={person} />
+}
+```
+
+<br><br>
+
+### 함수 컴포넌트 타입
+
+<br>
+
+타입은 타입스크립트가 코드를 javascript로 컴파일 할 때만 필요한 정보. 타입스크립트 코드가 자바프크립트 코드로 컴파일되고 나면 타입 관련 내용은 자바스크립트 코드에서 완전히 사라진다.
+<br>
+
+import type 구문
+
+```javascript
+import type {FC} from 'react'
+import {component} from 'react'
 ```

@@ -221,6 +221,15 @@ export default function App() {
 }
 ```
 
+<br>
+
+##### ID
+
+<br>
+
+모든 React와 React Native 컴포넌트 key, childern, ref 등 3개 속성을 기본으로 가진다.
+이 중 key 속성은 React Framework가 Component의 렌더링 속도를 최적화 하는 데 필요한 속성이다.
+
 <br><br>
 
 ### 함수 컴포넌트 타입
@@ -236,3 +245,28 @@ import type 구문
 import type {FC} from 'react'
 import {component} from 'react'
 ```
+
+### 스타일
+
+<br>
+
+인라인 스타일과 StyleSheet 스타일과의 차이
+<br>
+
+컴포넌트는 필요에 따라 리액트 네이티브에 의해 재렌더링 됨.
+
+<b>인라인 스타일 방식</b>은 자바스크립트 엔진 쪽 스레드에서 UI 스레드 쪽으로 브리지를 경유하여 옮겨 가므로 내용이 <b>컴포넌트 로직에 의해 바뀌지 않을 때는 앱의 디스플레이 속도가 떨어짐.</b>
+이 와는 달리 <b>StyleSheet.create로 생성된 스타일 객체</b>는 UI Thread 쪽에 캐시되므로 <b>앱 전체의 디스플레이 속도가 빨라짐.</b>
+
+<br><br>
+
+### width와 height 스타일 속성과 값 설정 방법
+
+<br>
+
+width 와 height 스타일의 속성값 4가지 방법
+
+1. 명시적으로 width, height를 설정하지 않고 React Native의 기본 설정 방식을 따르는 방법
+2. 픽셀(pixel, px) 단위의 숫자를 직접 설정하는 방법
+3. 부모 요소의 width, height를 기준으로 자식 Component의 크기를 퍼센트(%)로 설정하는 방법
+4. flex 속성을 사용하여 여러 자식 Component가 부모 Component의 크기를 분할하여 가지는 방법
